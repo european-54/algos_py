@@ -21,46 +21,60 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
-"""
 
-import operator
+# Линейная сложность — O(n)
+# Функция схожа с линейной сложностью, так как идет перебор массива для поиска 3 максимальных значений. Количество шагов = количеству элементов в массиве.
+# O(n) - в нотации О-большое
+def var_1 (dict_obj):
+    l_result_dict = {'Первая кампания': 0, 'Вторая кампания': 0, 'Третья кампания': 0}
 
-dict1 = {"one": 10000, "two": 30000, "three": 15000, "four": 25000, "five": 20000}
-sorted_values = sorted(dict1.values()) # Sort the values
-sorted_dict = {}
+    for idx in dict_obj:                                           #O(n)
+          if l_result_dict.get('Первая кампания') == 0 :
+              l_result_dict.update({'Первая кампания': idx})
+              continue
+          if  l_result_dict.get('Вторая кампания') == 0 :
+              l_result_dict.update({'Вторая кампания': idx})
+              continue
+          if  l_result_dict.get('Третья кампания') == 0 :
+              l_result_dict.update({'Третья кампания': idx})
+              continue
 
-for i in sorted_values:
-    for k in dict1.keys():
-        if dict1[k] == i:
-            sorted_dict[k] = dict1[k]
-            break
-a =  sorted_dict
-print(sorted(a))
-b = sorted(a, reverse = True)
+          if dict_obj.get(idx) > dict_obj.get(l_result_dict.get('Первая кампания')):
+              l_result_dict.update({'Третья кампания': l_result_dict.get('Вторая кампания')})
+              l_result_dict.update({'Вторая кампания': l_result_dict.get('Первая кампания')})
+              l_result_dict.update({'Первая кампания': idx})
+              continue
+          elif dict_obj.get(idx) > dict_obj.get(l_result_dict.get('Вторая кампания')):
+              l_result_dict.update({'Третья кампания': l_result_dict.get('Вторая кампания')})
+              l_result_dict.update({'Вторая кампания': idx})
+              continue
+          elif dict_obj.get(idx) > dict_obj.get(l_result_dict.get('Третья кампания')):
+              l_result_dict.update({'Третья кампания': idx})
+              continue
 
-print(b)
-"""
+    return l_result_dict
+# Квадратичная сложность — O(n2)
+# Функция схожа с Квадратичной сложностью, так как идет цикл в цикле, из-за этого O(n2)
+# O(n2) - в нотации О-большое
+def var_2 (dict_obj):
+    l_result_dict = {'Первая кампания': 0, 'Вторая кампания': 0, 'Третья кампания': 0}
 
-"""
-import operator
+    for idx in dict_obj:                                     #Один Цикл
+      for idx1 in reversed(l_result_dict):                   #Второй цикл внутри первого
+         if l_result_dict.get(idx1) == 0:
+             l_result_dict.update({idx1: dict_obj.get(idx)})
 
-dict1 = {"one": 10000, "two": 30000, "three": 15000, "four": 25000, "five": 20000}
-sorted_tuples = sorted(dict1.items(), key=operator.itemgetter(1))
-print(sorted_tuples)  # [(1, 1), (3, 4), (2, 9)]
-sorted_dict = {k: v for k, v in sorted_tuples}
+         if l_result_dict.get(idx1) < dict_obj.get(idx):
+             continue
+         else:
+             l_result_dict.update({idx1: dict_obj.get(idx)})
 
-print(sorted_dict) # {1: 1, 3: 4, 2: 9}
-a = sorted(dict1, reverse=True)
-print(a) #
-"""
+    return l_result_dict
 
-D = {"one": 10000, "two": 30000, "three": 15000, "four": 25000, "five": 20000}
-my_max_val = 0
-for k,v in D.items():
-    if v > my_max_val:
-        my_max_val=v
-        my_max_key=k
+d = {'NKP1': 1000000000, 'NKP2': 2000000, 'NKP3': 123456778, 'NKP4': 6789034546}
 
-print(my_max_key)
-#  Сложность О(n)
-#  Задание выполнил насколько смог. Много время потратил. Видимо, для меня пока не под силу решать подобные задачи.
+print(var_1(d))
+print(var_2(d))
+
+# Как итог, две функции возвращают одинаковое значение кампаний.
+# Эффективным решением считаю 2, оно более гибкое, и не настроена на перебор как в первом случае.
