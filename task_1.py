@@ -24,3 +24,33 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+"""
+import operator, math
+
+# Доступные операторы
+## Поддерживаются только односимвольные
+OPS = {
+    '-': operator.sub,
+    '+': operator.add,
+    '*': operator.mul,
+    '/': operator.truediv,
+}
+if OPS == '0':math.exit()
+
+def calc(token):
+    try:
+        # Парсим одно число
+        return float(token)
+
+    except ValueError:
+        begin = token.find('(')
+        if begin == 0 and token[-1] == ')':
+            # Парсим просто выражение в скобках
+            return parse(token[1:-1])
+
+        elif begin > 0 and token[-1] == ')':
+            
+            return result
+        
+"""
