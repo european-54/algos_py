@@ -30,7 +30,7 @@ def rev_num(num, index=-1):
         rev_num(num, index)
 
 
-rev_num('123570')
+rev_num('1230')
 """
 
 
