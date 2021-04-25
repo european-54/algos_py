@@ -18,6 +18,7 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
 
+"""
 
 def rev_num(num, index=-1):
     try:
@@ -30,4 +31,12 @@ def rev_num(num, index=-1):
 
 
 rev_num('123570')
+"""
 
+
+def count_down(n):
+    print(n)
+    if n>0:
+        count_down(n-1)
+
+    print(count_down(10))
