@@ -25,7 +25,6 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
 
-"""
 import operator, math
 
 # Доступные операторы
@@ -36,7 +35,12 @@ OPS = {
     '*': operator.mul,
     '/': operator.truediv,
 }
-if OPS == '0':math.exit()
+# Доступные функции
+FUNCS = {
+    'sin': math.sin,
+    'cos': math.cos,
+}
+
 
 def calc(token):
     try:
@@ -50,7 +54,92 @@ def calc(token):
             return parse(token[1:-1])
 
         elif begin > 0 and token[-1] == ')':
-            
+            # Парсим функцию
+            name = token[0:begin]
+            if name not in FUNCS:
+                raise ValueError('Unknown function %s' % name)
+            # TODO: можно парсить много аргументов умно разделяя по запятой
+            arg0 = parse(token[begin+1:-1])
+            result = FUNCS[name](arg0)
+            # print('%s = %s' % (token, result))
             return result
-        
-"""
+
+        else:
+            # Неизвестный токен
+            # TODO: можно встроить константы/переменные
+            raise ValueError('Unknown token %s' % repr(token))
+
+
+def parse(txt):
+    # Рассчитывает выражение и возвращает числовой результат
+    # TODO: нет приоритета операторов
+    # Текущий токен
+    token = ''
+    # Уровень вложенности
+    # Вложненые выражения рассчитываются рекурсивно
+    depth = 0
+    # Текущий оператор
+    op = None
+    # Итоговое значение
+    current_value = None
+
+    def close_token():
+        # Эта функция закрывает текущий токен
+        # и сразу производит вычисления
+        nonlocal token, op, current_value
+        if token != '':
+            if current_value is None:
+                # Первый токен, его просто сохраняем
+                current_value = calc(token)
+            else:
+                # Применяем оператор
+                current_value = OPS[op](current_value, calc(token))
+                # Обнуляем оператор
+                op = None
+            print(op, token, current_value)
+            token = ''
+        if len(txt) == 1 and txt == '0':
+            close_token()
+            return current_value
+
+    # Обрабатываем выражение посимвольно
+    for c in txt:
+        if depth > 0:
+            # Если внутри скобок
+            if c == ' ':
+                # Пробелы не нужны
+                continue
+            token += c
+            if c == ')':
+                # Возвращаемся на уровень выше
+                depth -= 1
+                close_token()
+
+        elif c == '(':
+            # Удём внутрь скобок
+            if token == '':
+                # Это для фунций – имя функции и скобки
+                # должны идти единым токеном
+                close_token()
+            depth += 1
+            token += c
+
+        else:
+            # Парсим токен
+            if c == ' ':
+                # Пробелы не нужны
+                continue
+            elif c in OPS:
+                # Если встретился оператор
+                close_token()
+                op = c
+            else:
+                token += c
+
+    close_token()
+    return current_value
+
+result = parse('7 - sin(3.141592 * 0.75) + cos(2.718281)')
+# Можете сравнить с корректным результатом, всё 1-в-1:
+# result = 7 - math.sin(3.141592 * 0.75) + math.cos(2.718281)
+print('Result:', result)
