@@ -17,3 +17,17 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def rev_num(num, index=-1):
+    try:
+        print(num[index], end='')
+    except IndexError:
+        return
+    else:
+        index -= 1
+        rev_num(num, index)
+
+
+rev_num('123570')
+
