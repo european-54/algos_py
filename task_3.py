@@ -19,7 +19,7 @@
 """
 
 """
-
+#  Рабочий вариант №1
 def rev_num(num, index=-1):
     try:
         print(num[index], end='')
@@ -30,6 +30,7 @@ def rev_num(num, index=-1):
         rev_num(num, index)
 rev_num('1230')
 """
+#  Рабочий вариант №2
 
 
 def count_down(n):
