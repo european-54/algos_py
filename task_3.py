@@ -34,7 +34,7 @@ rev_num('1230')
 
 def count_down(n):
     print(n)
-    if n>0:
+    if n > 0:
         count_down(n-1)
 
     print(count_down(10))
