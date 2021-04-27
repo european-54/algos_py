@@ -7,3 +7,14 @@
 то реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к двум своим функциям.
 """
+from random import sample
+
+list = sample(range(-10, 11), 20)
+
+print(list)
+
+for a in range(20):
+    k=str(a+1)+' '+'may'
+    d={k:a}
+    print(d)
+print('Ves slovar imeet vid: ',d)
