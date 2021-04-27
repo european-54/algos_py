@@ -19,23 +19,3 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
-# Квадратичная сложность
-def alg_1 (lst_obj):
-
-    l_list_obj = list(lst_obj)
-    l_first = l_list_obj[1]
-    for idx in range(len(l_list_obj)):
-        for idx1 in idx:
-            if l_first < l_list_obj[idx]:
-               l_first = l_list_obj[idx]
-    return l_first
-
-# Линейная сложность
-def alg_2 (lst_obj):
-
-    l_list_obj = list(lst_obj)
-    l_first = l_list_obj[1]
-    for idx in range(len(l_list_obj)):
-        if l_first < l_list_obj[idx]:
-            l_first = l_list_obj[idx]
-    return l_first
