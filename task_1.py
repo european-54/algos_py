@@ -17,4 +17,4 @@ for a in range(20):
     k=str(a+1)+' '+'may'
     d={k:a}
     print(d)
-print('Ves slovar imeet vid: ',d)
+print('Весь словарь имеет вид: ',d)
