@@ -69,4 +69,3 @@ key = users[username]['key']
 new_key = hashlib.pbkdf2_hmac('sha256', password.encode('utf-8'), salt, 100000)
 
 assert key == new_key  # Ключи совпадают, поэтому совпадают пароли и у этого пользователя
-
