@@ -14,12 +14,26 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
-n = int(input())
-even = odd = 0
-while n > 0:
-    if n % 2 == 0:
-        even += 1
+def recur_method(numb, even=0, odd=0):
+    #  Рекурсия
+    #  Все цифры, числа извлечены
+    if numb == 0:
+        return even, odd
     else:
-        odd += 1
-    n = n//10
-print("%d, %d" % (even, odd))
+        #  извлекаем очередную цифру числах
+        cur_n = numb % 10
+        #  Число, естественно становится короче
+        numb = numb // 10
+        #  Проверка: цифра чётная или нечётная
+        if cur_n % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+        return recur_method(numb, even, odd)
+
+
+try:
+    NUMB = int(input("Введите натуральное число:"))
+    print(f"Количество чётных и нечетных цифр в числе: {recur_method(NUMB)}")
+except ValueError:
+    print("Вы вместо числа ввели строку")
