@@ -30,12 +30,16 @@ def rev_num(num, index=-1):
         rev_num(num, index)
 rev_num('1230')
 """
-#  Рабочий вариант №2
 
 
-def count_down(n):
-    print(n)
-    if n > 0:
-        count_down(n-1)
+def revers_number(numb):
+    #  Рекурсия
+    rest_numb, numeral = divmod(numb, 10)
+    if rest_numb == 0:
+        return str(numeral)
+    else:
+        return str(numeral) + str(revers_number(rest_numb))
 
-    print(count_down(10))
+
+number = int(input("Введите число, которое требуется перевернуть:"))
+print(f'Перевёрнутое число: {revers_number(number)}')
