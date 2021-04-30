@@ -43,3 +43,9 @@ def revers_number(numb):
 
 number = int(input("Введите число, которое требуется перевернуть:"))
 print(f'Перевёрнутое число: {revers_number(number)}')
+
+#  Вариант в одну строку:
+
+
+def revers_number(num):
+    return str(num) if num < 10 else str(num % 10) + revers_number(num // 10)
