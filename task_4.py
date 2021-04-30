@@ -25,7 +25,7 @@ except ValueError:
 
 """
 def recur_method(elem):
-    return 0 if elem == 0 else 1 + recur_method(elem - 1) / -2
+    return 0 if elem == 0 else 1 + recur_method(elem - 1) / -2 #  Решение в одну строку
     
     
 N_COUNT = int(input('Введите количество элементов: '))
