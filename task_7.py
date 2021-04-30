@@ -55,7 +55,7 @@ def recur_method(numb):
         
 try:
     NUMB = int(input("Введите число: "))
-    if recur_method(NUMB) == NUMB * (NUMB + 1) / 2:
+    if recur_method(NUMB) == NUMB * (NUMB + 1) / 2: #  Правая часть вынесена из рекурсии
         print('Равенство верно')
 except ValueError:
     print("Вы вместо числа ввели строку (((. Исправьтесь")
