@@ -25,3 +25,16 @@ def test_range():
     my_lst = list(range(1000))
 t4 = Timer("test_range()", "from __main__ import test_range")
 print("list range ", t4.timeit(number=1000), "milliseconds")
+
+def enumerate(sequence, start=0):
+    n = start
+    for elem in sequence:
+        yield n, elem
+        n += 1
+
+   def test_range():
+       my_lst = list(range(1000))
+
+
+t4 = Timer("test_range()", "from __main__ import test_range")
+print("list range ", t4.timeit(number=1000), "milliseconds")
