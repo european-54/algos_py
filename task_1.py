@@ -18,3 +18,10 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+from timeit import Timer
+# встроенная функция range
+def test_range():
+    my_lst = list(range(1000))
+t4 = Timer("test_range()", "from __main__ import test_range")
+print("list range ", t4.timeit(number=1000), "milliseconds")
