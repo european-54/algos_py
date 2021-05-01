@@ -8,9 +8,18 @@
 Добавьте аналитику: что вы сделали и почему
 """
 
-
 from timeit import timeit
+from timeit import Timer
+import random
 
+# Добавили новую функцию, которая бегает по циклу через enumerate, enumerate уже сам строит индексы массива
+# И нам не нужно выбирать этот индекс самостоятельно из листа nums.
+def func_2(nums):
+    new_arr = []
+    for i,num in enumerate(nums,start=0):
+        if num % 2 == 0:
+            new_arr.append(i)
+    return new_arr
 
 def func_1(nums):
     new_arr = []
@@ -19,42 +28,13 @@ def func_1(nums):
             new_arr.append(i)
     return new_arr
 
-from timeit import Timer
-# встроенная функция range
-def test_range():
-    my_lst = list(range(1000))
-t4 = Timer("test_range()", "from __main__ import test_range")
-print("list range ", t4.timeit(number=1000), "milliseconds")
-"""
+#l = [1,2,4,7,8,10,22]
 
-def enumerate(sequence, start=0):
-    n = start
-    for elem in sequence:
-        yield n, elem
-        n += 1
+l = random.randint(0,10000000000)
 
-   def test_range():
-       my_lst = list(range(1000))
+t = Timer("func_1","from __main__ import func_1")
+t1 = Timer("func_2","from __main__ import func_2")
 
+# При больших объемах, через функцию enumerate, работает быстрее. Что показывает статистика func1= 0.0165083 func2= 0.0164659
 
-t4 = Timer("test_range()", "from __main__ import test_range")
-print("list range ", t4.timeit(number=1000), "milliseconds")
-
-"""
-from random import randint
-N = 5
-arr = [0] * N
-even = []
-for i in range(N):
-    arr[i] = randint(10, 19)
-    if arr[i] % 2 == 0:
-        even.append(i)
-print(arr)
-print('Индексы четных элементов: ', even)
-
-from timeit import Timer
-# встроенная функция range
-def test_range():
-    my_lst = list(range(1000))
-t4 = Timer("test_range()", "from __main__ import test_range")
-print("list range ", t4.timeit(number=1000), "milliseconds")
+print("func1=", t.timeit(number=1000000),"func2=",t1.timeit(number=1000000))
