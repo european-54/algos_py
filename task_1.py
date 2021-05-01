@@ -25,6 +25,7 @@ def test_range():
     my_lst = list(range(1000))
 t4 = Timer("test_range()", "from __main__ import test_range")
 print("list range ", t4.timeit(number=1000), "milliseconds")
+"""
 
 def enumerate(sequence, start=0):
     n = start
@@ -36,5 +37,24 @@ def enumerate(sequence, start=0):
        my_lst = list(range(1000))
 
 
+t4 = Timer("test_range()", "from __main__ import test_range")
+print("list range ", t4.timeit(number=1000), "milliseconds")
+
+"""
+from random import randint
+N = 5
+arr = [0] * N
+even = []
+for i in range(N):
+    arr[i] = randint(10, 19)
+    if arr[i] % 2 == 0:
+        even.append(i)
+print(arr)
+print('Индексы четных элементов: ', even)
+
+from timeit import Timer
+# встроенная функция range
+def test_range():
+    my_lst = list(range(1000))
 t4 = Timer("test_range()", "from __main__ import test_range")
 print("list range ", t4.timeit(number=1000), "milliseconds")
